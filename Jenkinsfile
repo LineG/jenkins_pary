@@ -6,11 +6,19 @@ pipeline {
         choice(name: 'VERSION', choices: ['1.1.0', '1.2.0', '1.3.0'], description: '')
         booleanParam(name: 'executeTests', defaultValue: true, description: '')
     }
+    stage("init") {
+            steps {
+                script {
+                   gv = load "work.groovy" 
+                }
+            }
+        }
+
     stages {
         stage("build") {
             steps {
                 script {
-                    echo "building the app ..."
+                    gv.build()
                 }
             }
         }
@@ -22,14 +30,14 @@ pipeline {
             }
             steps {
                 script {
-                    echo "testing the app ..."
+                    gv.testApp()
                 }
             }
         }
         stage("deploy") {
             steps {
                 script {
-                    echo "deploying the app ..."
+                    gv.deployApp()
                 }
             }
         }

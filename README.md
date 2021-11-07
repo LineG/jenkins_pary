@@ -1,2 +1,1 @@
-# jenkins_pary
-Tutorial on jenkins
+# party-with-jenkins
